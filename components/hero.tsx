@@ -11,11 +11,11 @@ const slides = [
         title: "Cuidamos tu salud respiratoria",
         subtitle: "y bienestar integral",
     },
-    {
-        image: "/images/hero-2.jpg",
-        title: "Tecnología de vanguardia",
-        subtitle: "para diagnósticos precisos",
-    },
+    // {
+    //     image: "/images/hero-2.jpg",
+    //     title: "Tecnología de vanguardia",
+    //     subtitle: "para diagnósticos precisos",
+    // },
     {
         image: "/images/hero-3.jpg",
         title: "Atención especializada",
