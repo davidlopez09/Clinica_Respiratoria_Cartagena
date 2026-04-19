@@ -1,7 +1,40 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 import { ArrowLeft, LockKeyhole, ShieldCheck, UserRound } from "lucide-react";
+import { authenticatePortalUser, ensurePortalStore, getPortalSession, setPortalSession } from "@/lib/portal-storage";
 
 export default function LoginPage() {
+    const router = useRouter();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        ensurePortalStore();
+
+        if (getPortalSession()) {
+            router.replace("/portal");
+        }
+    }, [router]);
+
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const session = authenticatePortalUser(username, password);
+
+        if (!session) {
+            setError("Credenciales invalidas. Usa ADMIN / ADMIN o asd / asd.");
+            return;
+        }
+
+        setPortalSession(session);
+        setError("");
+        router.push("/portal");
+    }
+
     return (
         <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(0,96,170,0.18),_transparent_30%),linear-gradient(135deg,_#f5f7fa_0%,_#eef3f8_48%,_#f8fbff_100%)]">
             <section className="mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 py-10 sm:px-6 lg:px-8">
@@ -70,9 +103,14 @@ export default function LoginPage() {
                                 <p className="text-sm leading-6 text-muted-foreground sm:text-base">
                                     Ingresa con tu usuario y contraseña para continuar.
                                 </p>
+                                <div className="rounded-2xl border border-primary/10 bg-primary/6 px-4 py-3 text-sm text-primary">
+                                    Medico: ADMIN / ADMIN
+                                    <br />
+                                    Paciente: asd / asd
+                                </div>
                             </div>
 
-                            <form className="space-y-5">
+                            <form className="space-y-5" onSubmit={handleSubmit}>
                                 <div className="space-y-2">
                                     <label htmlFor="username" className="text-sm font-medium text-foreground">
                                         Usuario
@@ -81,6 +119,8 @@ export default function LoginPage() {
                                         id="username"
                                         name="username"
                                         type="text"
+                                        value={username}
+                                        onChange={(event) => setUsername(event.target.value)}
                                         placeholder="Ingresa tu usuario"
                                         className="h-13 w-full rounded-2xl border border-border bg-white px-4 text-base text-foreground shadow-sm transition-all outline-none placeholder:text-muted-foreground/70 focus:border-primary focus:ring-4 focus:ring-primary/12"
                                     />
@@ -94,10 +134,18 @@ export default function LoginPage() {
                                         id="password"
                                         name="password"
                                         type="password"
+                                        value={password}
+                                        onChange={(event) => setPassword(event.target.value)}
                                         placeholder="Ingresa tu contraseña"
                                         className="h-13 w-full rounded-2xl border border-border bg-white px-4 text-base text-foreground shadow-sm transition-all outline-none placeholder:text-muted-foreground/70 focus:border-primary focus:ring-4 focus:ring-primary/12"
                                     />
                                 </div>
+
+                                {error ? (
+                                    <div className="rounded-2xl border border-secondary/15 bg-secondary/8 px-4 py-3 text-sm font-medium text-secondary">
+                                        {error}
+                                    </div>
+                                ) : null}
 
                                 <div className="flex items-center justify-between gap-4 text-sm">
                                     <label className="flex items-center gap-2 text-muted-foreground">
