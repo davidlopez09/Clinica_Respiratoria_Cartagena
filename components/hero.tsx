@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Calendar, Shield, Users, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const slides = [
     {
@@ -172,17 +173,15 @@ export function Hero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                            <motion.a
-                                href="https://wa.me/573156202499?text=Hola,%20quisiera%20solicitar%20una%20cita"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-4 rounded-full font-medium text-center transition-all hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                <Calendar className="w-5 h-5" />
-                                Agendar Cita
-                            </motion.a>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                                <Link
+                                    href="/agendar-cita"
+                                    className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-4 rounded-full font-medium text-center transition-all hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                                >
+                                    <Calendar className="w-5 h-5" />
+                                    Agendar Cita
+                                </Link>
+                            </motion.div>
                             <motion.a
                                 href="#clinica"
                                 className="border-2 border-white/50 hover:border-white text-white px-8 py-4 rounded-full font-medium text-center transition-all flex items-center justify-center gap-2 hover:bg-white/10"

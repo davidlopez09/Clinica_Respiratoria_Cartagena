@@ -103,14 +103,12 @@ export function Header() {
 
                         {/* CTA Button */}
                         <div className="hidden md:flex items-center gap-3">
-                            <a
-                                href="https://wa.me/573156202499?text=Hola,%20quisiera%20solicitar%20una%20cita"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <Link
+                                href="/agendar-cita"
                                 className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6 py-2.5 rounded-full font-medium text-sm transition-all hover:shadow-lg hover:scale-105"
                             >
                                 Solicitar Cita
-                            </a>
+                            </Link>
                             <Link
                                 href="/login"
                                 aria-label="Ingresar al portal de usuarios"
@@ -151,14 +149,13 @@ export function Header() {
                                         {item.name}
                                     </Link>
                                 ))}
-                                <a
-                                    href="https://wa.me/573156202499?text=Hola,%20quisiera%20solicitar%20una%20cita"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <Link
+                                    href="/agendar-cita"
                                     className="mt-4 bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6 py-3 rounded-full font-medium text-center transition-all"
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Solicitar Cita
-                                </a>
+                                </Link>
                                 <Link
                                     href="/login"
                                     className="mt-4 flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-medium text-foreground transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground"

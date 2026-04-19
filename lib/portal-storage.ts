@@ -36,6 +36,11 @@ export type AppointmentRecord = {
     doctor: string;
     status: string;
     date: string;
+    document?: string;
+    phone?: string;
+    email?: string;
+    consultationType?: string;
+    reason?: string;
 };
 
 export type ActivityRecord = {
@@ -187,4 +192,32 @@ export function clearPortalSession() {
         return;
     }
     window.localStorage.removeItem(PORTAL_SESSION_KEY);
+}
+
+export function addPortalAppointment(appointment: Omit<AppointmentRecord, "id" | "status"> & { status?: string }) {
+    const store = getPortalStore();
+
+    const nextAppointment: AppointmentRecord = {
+        id: crypto.randomUUID(),
+        status: appointment.status ?? "Confirmada",
+        ...appointment,
+    };
+
+    const nextStore: PortalStore = {
+        ...store,
+        appointments: [nextAppointment, ...store.appointments],
+        activities: [
+            {
+                id: crypto.randomUUID(),
+                patientName: appointment.patientName,
+                action: "Cita agendada",
+                specialty: appointment.specialty,
+                time: appointment.time,
+            },
+            ...store.activities,
+        ].slice(0, 12),
+    };
+
+    savePortalStore(nextStore);
+    return nextAppointment;
 }
