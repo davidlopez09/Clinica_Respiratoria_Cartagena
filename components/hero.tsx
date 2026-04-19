@@ -7,21 +7,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 const slides = [
-    {
-        image: "/images/hero-1.jpg",
+    // {
+    //     image: "/images/hero-1.jpg",
+    //     title: "Cuidamos tu salud respiratoria",
+    //     subtitle: "y bienestar integral",
+    // },
+     {
+        image: "/images/hero-5.avif",
         title: "Cuidamos tu salud respiratoria",
         subtitle: "y bienestar integral",
     },
-    // {
-    //     image: "/images/hero-2.jpg",
-    //     title: "Tecnología de vanguardia",
-    //     subtitle: "para diagnósticos precisos",
-    // },
     {
-        image: "/images/hero-3.jpg",
-        title: "Atención especializada",
-        subtitle: "para toda la familia",
+        image: "/images/hero-6.jpg",
+        title: "Tecnología de vanguardia",
+        subtitle: "para diagnósticos precisos",
     },
+    // {
+    //     image: "/images/hero-3.jpg",
+    //     title: "Atención especializada",
+    //     subtitle: "para toda la familia",
+    // },
 ];
 
 const stats = [
@@ -120,7 +125,7 @@ export function Hero() {
             </button>
 
             {/* Slide Indicators */}
-            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+            {/* <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-3">
                 {slides.map((_, index) => (
                     <button
                         key={index}
@@ -131,7 +136,7 @@ export function Hero() {
                         aria-label={`Ir a slide ${index + 1}`}
                     />
                 ))}
-            </div>
+            </div> */}
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
                 <div className="max-w-3xl">
